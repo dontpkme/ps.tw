@@ -48,7 +48,42 @@ $(document).ready(function() {
 });
 
 var log = function(str) {
+	dialog(str);
 	$("#history").append("<div class='log-item'>" + str + "</div>").scrollTop(10000);
+}
+
+var dialogContent;
+var dialogBuffer = [];
+var dialog = function(str) {
+	dialogBuffer.push(str);
+	if (!$(".dialog").hasClass("show")) {
+		$(".dialog").addClass("show");
+		setTimeout("dialogType()", 500);
+		dialogContent = dialogBuffer[0];
+	}
+}
+
+var dialogType = function() {
+	$("#dialog-text").append(dialogContent.substring(0, 1));
+	dialogContent = dialogContent.substring(1);
+	if (dialogContent.length > 0) {
+		setTimeout("dialogType()", 100);
+	} else {
+		setTimeout("dialogHide()", 500);
+		var indexToRemove = 0;
+		var numberToRemove = 1;
+		dialogBuffer.splice(indexToRemove, numberToRemove);
+	}
+}
+
+var dialogHide = function() {
+	$("#dialog-text").empty();
+	if (dialogBuffer.length > 0) {
+		setTimeout("dialogType()", 500);
+		dialogContent = dialogBuffer[0];
+	} else {
+		$(".dialog").removeClass("show");
+	}
 }
 
 var emptyLog = function(str) {

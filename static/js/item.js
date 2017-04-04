@@ -12,6 +12,9 @@ var itemName = {
 	clay: "黏土",
 	grass: "草",
 	vine: "樹藤",
+	feather: "羽毛",
+	bone: "獸骨",
+	shell: "貝殼",
 
 	//technoligy
 	campfire: "火堆",

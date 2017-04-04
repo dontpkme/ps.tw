@@ -1,9 +1,22 @@
 var recipes = {
 	campfire: {
-		wood: 3,
-		branch: 4
+		resource: {
+			wood: 3,
+			branch: 4
+		}
 	},
-	flint: {
-
+	stoneknife: {
+		resource: {
+			stone: 2,
+		}
+	}
+	stoneaxe: {
+		resource: {
+			stone: 1,
+			wood: 1,
+		},
+		based: [
+			"stoneknife"
+		]
 	}
 };

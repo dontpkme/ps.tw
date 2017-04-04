@@ -7,6 +7,34 @@ body {
 	margin: 0;
 }
 
+.dialog {
+	background-color: rgba(255, 255, 255, 0.85);
+	position: absolute;
+	width: 100%;
+	height: 0px;
+	top: 50%;
+	left: 0;
+	margin-top: 0px;
+	z-index: 20;
+	overflow: hidden;
+	-webkit-transition: margin-top .5s, height .5s;
+	transition: margin-top .5s, height .5s;
+}
+
+.dialog.show {
+	margin-top: -30px;
+	height: 60px;
+}
+
+.dialog table {
+	height: 100%;
+	width: 100%;
+}
+
+#dialog-text {
+	text-align: center;
+}
+
 #menu {
 	display: none;
 	position: absolute;
@@ -26,6 +54,7 @@ body {
 }
 
 .log {
+	display: none;
 	width: 100%;
 	height: 120px;
 }
@@ -100,6 +129,8 @@ body {
 .sky-filter {
 	width: 100%;
 	height: 100%;
+	-webkit-transition: background 1s;
+	transition: background 1s;
 }
 
 .sky-filter.morning {
@@ -107,7 +138,7 @@ body {
 }
 
 .sky-filter.night {
-	background: rgba(40, 40, 60, 0.5);
+	background: rgba(40, 40, 60, 0.9);
 }
 
 .sky-filter.noon {
@@ -123,7 +154,7 @@ body {
 
 .land {
 	background-image: url(/image/land.gif);
-	background-size: 100% 100%;
+	background-size: 120% 100%;
 	background-repeat: no-repeat;
 	background-position: center;
 	width: 100%;
