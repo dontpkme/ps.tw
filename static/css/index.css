@@ -1,0 +1,133 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+html,
+body {
+	font-family: 'Noto Sans TC', sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+#menu {
+	display: none;
+	position: absolute;
+}
+
+#menu.show {
+	display: block;
+	z-index: 10;
+}
+
+.operate {
+	width: 100%;
+}
+
+.collect-btn {
+	background: white;
+}
+
+.log {
+	width: 100%;
+	height: 120px;
+}
+
+.log-item {
+	position: relative;
+}
+
+#history {
+	width: 100%;
+	height: 100px;
+	margin: 10px 0px 10px 10px;
+	overflow-y: scroll;
+}
+
+.health {
+	line-height: 64px;
+}
+
+.heart {
+	width: 32px;
+	height: 32px;
+	display: inline-block;
+	background-image: url(/image/heart.gif);
+	background-size: cover;
+	position: relative;
+	top: 8px;
+}
+
+.heart.half {
+	background-image: url(/image/half-heart.gif);
+}
+
+.item {
+	box-sizing: border-box;
+	display: inline-block;
+	width: 64px;
+	height: 64px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image: url(/image/item-border.gif);
+	cursor: pointer;
+	margin: 2px;
+}
+
+.item-pic {
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 40px 40px;
+}
+
+.amount {
+	position: relative;
+	top: -8px;
+	float: right;
+	right: 9px;
+	top: -24px;
+	font-size: 12px;
+}
+
+.scene {
+	width: 100%;
+	height: 200px;
+	position: relative;
+	background-image: url(/image/sky.png);
+	background-size: contain;
+	overflow: hidden;
+}
+
+.sky-filter {
+	width: 100%;
+	height: 100%;
+}
+
+.sky-filter.morning {
+	background: rgba(255, 255, 255, 0);
+}
+
+.sky-filter.night {
+	background: rgba(40, 40, 60, 0.5);
+}
+
+.sky-filter.noon {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.avatar {
+	position: absolute;
+	bottom: 58px;
+	left: 50%;
+	margin-left: -32px;
+}
+
+.land {
+	background-image: url(/image/land.gif);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 100%;
+	height: 100px;
+	position: absolute;
+	bottom: -24px;
+}
