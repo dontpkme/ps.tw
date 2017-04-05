@@ -12,6 +12,25 @@ $(document).ready(function() {
 		$("#menu").toggleClass("show");
 	});
 
+	$("#make").click(function(e) {
+		if (!$("#makelist").hasClass("show")) {
+			$("#makelist").addClass("show").empty();
+			$.each(recipes, function(i, v) {
+				var s = '<div class="makeitem"><span class="makeitempic" style="background-image:url(/image/item/' + i + '.gif)" title="' + itemName[i] + '"></span> = </div><div class="makeformula">';
+				$.each(recipes[i].resource, function(ii, vv) {
+					console.log(ii);
+					console.log(vv);
+					console.log(inventory[ii]);
+					s += '<span class="resource" style="background-image:url(/image/item/' + ii + '.gif)" title="' + itemName[ii] + '"></span> x ' + vv;
+				});
+				s += "</div>";
+				$("#makelist").append(s);
+			});
+		} else {
+			$("#makelist").removeClass("show");
+		}
+	});
+
 	$("#nap").click(function(e) {
 		log("在營地休息了一個" + dayTimeName[dayTime - 1]);
 		dayTimePass();

@@ -19,6 +19,8 @@ var itemName = {
 	//technoligy
 	campfire: "火堆",
 	flint: "燧石",
+	stoneknife: "石刀",
+	stoneaxe: "石斧",
 };
 
 var inventory = {};

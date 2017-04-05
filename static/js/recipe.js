@@ -9,7 +9,7 @@ var recipes = {
 		resource: {
 			stone: 2,
 		}
-	}
+	},
 	stoneaxe: {
 		resource: {
 			stone: 1,

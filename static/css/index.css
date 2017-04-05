@@ -162,3 +162,56 @@ body {
 	position: absolute;
 	bottom: -24px;
 }
+
+#makelist {
+	width: 300px;
+	height: 300px;
+	margin-left: -150px;
+	margin-top: -150px;
+	left: 50%;
+	top: 50%;
+	position: absolute;
+	background-color: rgb(230, 230, 230);
+	z-index: 30;
+	display: none;
+}
+
+#makelist.show {
+	display: block;
+}
+
+.makeitem {
+	float: left;
+	width: 20%;
+	height: 40px;
+	line-height: 40px;
+}
+
+.makeitempic {
+	width: 32px;
+	height: 32px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	display: inline-block;
+	position: relative;
+	margin-top: -10px;
+	top: 10px;
+}
+
+.makeformula {
+	float: right;
+	width: 75%;
+	height: 40px;
+	line-height: 40px;
+}
+
+#makelist .resource {
+	width: 32px;
+	height: 32px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	display: inline-block;
+	position: relative;
+	margin-top: -10px;
+	top: 10px;
+}
