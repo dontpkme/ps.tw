@@ -7,6 +7,14 @@ body {
 	margin: 0;
 }
 
+@media screen and (min-width:480px) {
+	body {
+		width: 480px;
+		margin: 0 auto;
+	}
+
+}
+
 .dialog {
 	background-color: rgba(255, 255, 255, 0.85);
 	position: absolute;
