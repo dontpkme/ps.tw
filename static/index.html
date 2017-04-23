@@ -17,11 +17,14 @@
 	    	<div class="health" id="health-bar"></div>
 	    	<div id="day-event">
 	    		<div>
+			    	<button class="action-btn" id="start">ＧＯ</button>
+	    			<!--
 			    	<button class="action-btn" id="collect">採集</button>
 			    	<button class="action-btn" id="make">製作</button>
 			    	<button class="action-btn" id="search">搜索</button>
 			    	<button class="action-btn" id="explore">冒險</button>
 			    	<button class="action-btn" id="nap">休息</button>
+			    	-->
 			    	<div id="menu">
 			    		<div class="menu-item">
 			    			<button class="collect-btn" id="collect-hunt">狩獵</button>
@@ -29,9 +32,9 @@
 			    		<div class="menu-item">
 			    			<button class="collect-btn" id="collect-fish">捕魚</button>
 			    		</div>
-			    		<div class="menu-item">
+			    		<!-- <div class="menu-item">
 			    			<button class="collect-btn" id="collect-fruit">採果</button>
-			    		</div>
+			    		</div> -->
 			    		<div class="menu-item">
 			    			<button class="collect-btn" id="collect-water">取水</button>
 			    		</div>
@@ -57,11 +60,15 @@
 		    		</table>
 		    	</div>
 	    		<div class="sky-filter morning"></div>
-		    	<div class="avatar"><img src="/image/pcman.gif"/></div>
+		    	<div class="avatar">
+		    		<div class="info-box char-action" data-action-type="1">採集</div>
+		    		<img src="/image/pcman-wululu.gif"/>
+		    	</div>
 	    		<div class="land"></div>
 	    	</div>
-	    	工具
-		    <div class="items" id="tool"></div>
+		    <div id="status">
+		    	
+		    </div>
 	    	資源
 		    <div class="items" id="inventory"></div>
     	</div>

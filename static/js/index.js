@@ -120,6 +120,7 @@ var render = function() {
 	}
 
 	$("#survive-day").text(surviveDay);
+	/*
 	switch (dayTime) {
 		case 1:
 			$("#survive-time").text(dayTimeName[dayTime - 1]);
@@ -137,6 +138,7 @@ var render = function() {
 			$("#night-event").show();
 			break;
 	}
+	*/
 	switch (weather) {
 		case "sunny":
 			$("#weather").text("晴朗");
@@ -182,6 +184,23 @@ var render = function() {
 	$.each($(".item-pic"), function(i, v) {
 		var $v = $(v);
 		$v.css("background-image", "url(/image/item/" + ($v.attr("data-pic")) + ".gif)");
+	});
+
+	$(".char-action").click(function(e) {
+		switch ($(e.target).attr("data-action-type")) {
+			case "1":
+				$(e.target).text("研發");
+				$(e.target).attr("data-action-type", "2");
+				break;
+			case "2":
+				$(e.target).text("休息");
+				$(e.target).attr("data-action-type", "3");
+				break;
+			case "3":
+				$(e.target).text("採集");
+				$(e.target).attr("data-action-type", "1");
+				break;
+		}
 	});
 }
 
@@ -268,6 +287,7 @@ var doWater = function() {
 	}
 }
 
+/*
 var doLumber = function() {
 	r = Math.floor(Math.random() * 2);
 	log(dayTimeName[dayTime - 1] + "選擇了外出蒐集木材");
@@ -283,6 +303,7 @@ var doLumber = function() {
 			break;
 	}
 }
+*/
 
 var doStone = function() {
 	r = Math.floor(Math.random() * 2);

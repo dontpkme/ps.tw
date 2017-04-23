@@ -223,3 +223,18 @@ body {
 	margin-top: -10px;
 	top: 10px;
 }
+
+.info-box {
+	background-color: #333333;
+	color: #ffffff;
+}
+
+.char-action {
+	width: 54px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	margin-bottom: 8px;
+	margin-left: 5px;
+	cursor: pointer;
+}
