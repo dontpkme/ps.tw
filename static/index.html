@@ -17,41 +17,10 @@
 	    	<div class="health" id="health-bar"></div>
 	    	<div id="day-event">
 	    		<div>
-			    	<button class="action-btn" id="start">ＧＯ</button>
-	    			<!--
-			    	<button class="action-btn" id="collect">採集</button>
-			    	<button class="action-btn" id="make">製作</button>
-			    	<button class="action-btn" id="search">搜索</button>
-			    	<button class="action-btn" id="explore">冒險</button>
-			    	<button class="action-btn" id="nap">休息</button>
-			    	-->
-			    	<div id="menu">
-			    		<div class="menu-item">
-			    			<button class="collect-btn" id="collect-hunt">狩獵</button>
-			    		</div>
-			    		<div class="menu-item">
-			    			<button class="collect-btn" id="collect-fish">捕魚</button>
-			    		</div>
-			    		<!-- <div class="menu-item">
-			    			<button class="collect-btn" id="collect-fruit">採果</button>
-			    		</div> -->
-			    		<div class="menu-item">
-			    			<button class="collect-btn" id="collect-water">取水</button>
-			    		</div>
-			    		<div class="menu-item">
-			    			<button class="collect-btn" id="collect-lumber">木材</button>
-			    		</div>
-			    		<div class="menu-item">
-			    			<button class="collect-btn" id="collect-stone">石材</button>
-			    		</div>
-			    		<div class="menu-item">
-			    			<button class="collect-btn" id="collect-clay">黏土</button>
-			    		</div>
-			    	</div>
-		    	</div>
-		    </div>
-	    	<div id="night-event">
-		    	<button class="action-btn" id="rest">休息</button>
+			    	<button class="action-btn" id="start-btn">ＧＯ</button>
+			    	<button class="action-btn" id="inventory-btn">資源</button>
+			    	<button class="action-btn" id="log-btn">日誌</button>
+			    </div>
 	    	</div>
 	    	<div class="scene">
 		    	<div class="dialog">
@@ -67,10 +36,15 @@
 	    		<div class="land"></div>
 	    	</div>
 		    <div id="status">
-		    	
+		    	<div class="functionTab" id="inventoryTab">
+			    	資源
+			    	<div class="items" id="inventory"></div>
+		    	</div>
+		    	<div class="functionTab" id="logTab">
+		    		冒險日誌
+			    	<div class="items" id="log"></div>
+		    	</div>
 		    </div>
-	    	資源
-		    <div class="items" id="inventory"></div>
     	</div>
     	<div class="log">
 	    	<div id="history"></div>
@@ -79,6 +53,7 @@
     </body>
 </html>
 
-<script src="/js/recipe.js"></script>
 <script src="/js/item.js"></script>
+<script src="/js/recipe.js"></script>
+<script src="/js/encounter.js"></script>
 <script src="/js/index.js"></script>

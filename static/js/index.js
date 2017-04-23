@@ -3,13 +3,34 @@ var dayTime = 1;
 var weather = "";
 var weatherCount = 0;
 var HP = 10;
+var adventureTime;
+var adventureEnv = "normal";
 
+var lootItem = {};
 $(document).ready(function() {
 	getNewWeather();
 	render();
 
-	$("#collect").click(function(e) {
-		$("#menu").toggleClass("show");
+	$("#start-btn").click(function(e) {
+		$(".functionTab").hide();
+		$("#logTab").show();
+		$("#log").empty();
+		adventureTime = 10;
+		lootItem = {};
+		$("#start").prop("disabled", true);
+		setTimeout(function() {
+			onEncounter();
+		}, 1000);
+	});
+
+	$("#log-btn").click(function(e) {
+		$(".functionTab").hide();
+		$("#logTab").show();
+	});
+
+	$("#inventory-btn").click(function(e) {
+		$(".functionTab").hide();
+		$("#inventoryTab").show();
 	});
 
 	$("#make").click(function(e) {
@@ -31,16 +52,21 @@ $(document).ready(function() {
 		}
 	});
 
+	/*
 	$("#nap").click(function(e) {
 		log("在營地休息了一個" + dayTimeName[dayTime - 1]);
 		dayTimePass();
 	});
+	*/
 
+	/*
 	$("#rest").click(function(e) {
 		emptyLog();
 		dayTimePass();
 	});
+	*/
 
+	/*
 	$(".collect-btn").click(function(e) {
 		switch ($(e.target).attr("id")) {
 			case "collect-hunt":
@@ -64,6 +90,7 @@ $(document).ready(function() {
 		}
 		dayTimePass();
 	});
+	*/
 });
 
 var log = function(str) {
@@ -480,7 +507,87 @@ var onMidNightEvent = function() {
 	}
 }
 
-var dayTimePass = function() {
+var onEncounter = function() {
+	char = getChar();
+	adventureTime--;
+
+	// get adventure environment
+	// TODO: get differeny environment by different chance
+	var r = Math.floor(Math.random() * 2);
+	switch (r) {
+		case 0:
+			adventureEnv = "normal";
+			break;
+		case 1:
+			adventureEnv = "wood";
+			break;
+	}
+
+	// get encounter event
+	var ev;
+	$.each(encounters, function(i, v) {
+		if (adventureEnv == i) {
+			ev = encounters[i][Math.floor(Math.random() * encounters[i].length)];
+		}
+	});
+	if (typeof(ev.desc) == "function") {
+		var msg = (ev.desc()).replace(new RegExp("\\$N", 'g'), char.name);
+	} else {
+		var msg = (ev.desc).replace(new RegExp("\\$N", 'g'), char.name);
+	}
+	$("#log").append("<div>" + msg + "</div>");
+
+	// TODO: show actions
+	var action;
+
+	// TODO: get loot
+	if (ev.loot != undefined) {
+		$.each(ev.loot, function(i, v) {
+			console.log(v);
+			var amount = v.min + Math.floor(Math.random() * (v.max - v.min + 1));
+			if (lootItem[v.type] == undefined) {
+				lootItem[v.type] = amount;
+			} else {
+				lootItem[v.type] += amount;
+			}
+			addInventory(v.type, amount);
+		});
+	} else if (action != undefined && action.loot != undefined) {
+
+	}
+
+	if (adventureTime > 0) {
+		setTimeout(function() {
+			onEncounter();
+		}, 1000);
+	} else {
+		countAdventureResult();
+		$("#start").prop("disabled", false);
+	}
+}
+
+var countAdventureResult = function() {
+	if (lootItem.length == 0) {
+		$("#log").append("<div>今日的採集結束，沒有獲得任何資源</div>");
+	} else {
+		var lootmsg = "";
+		console.log(lootmsg);
+		$.each(lootItem, function(i, v) {
+			lootmsg += itemName[i] + "x" + v;
+		});
+		$("#log").append("<div>今日的採集結束，獲得" + lootmsg + "</div>");
+	}
+	$("#log").append("<div>回到營地休息</div>");
+	render();
+}
+
+var getChar = function() {
+	return {
+		name: "巴魯"
+	}
+}
+
+/*var dayTimePass = function() {
 	if (dayTime == 3) {
 		onMidNightEvent();
 	}
@@ -505,7 +612,7 @@ var dayTimePass = function() {
 	log(getDayTimePassMessage());
 
 	render();
-}
+}*/
 
 var setInventory = function(type, amount) {
 	inventory[type] = amount;
