@@ -1,16 +1,20 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
 
-html, body {
+html,
+body {
 	font-family: 'Noto Sans TC', sans-serif;
 	padding: 0;
 	margin: 0;
 }
+
 @media screen and (min-width:480px) {
 	body {
 		width: 480px;
 		margin: 0 auto;
 	}
+
 }
+
 .dialog {
 	background-color: rgba(255, 255, 255, 0.85);
 	position: absolute;
@@ -24,48 +28,60 @@ html, body {
 	-webkit-transition: margin-top .5s, height .5s;
 	transition: margin-top .5s, height .5s;
 }
+
 .dialog.show {
 	margin-top: -30px;
 	height: 60px;
 }
+
 .dialog table {
 	height: 100%;
 	width: 100%;
 }
+
 #dialog-text {
 	text-align: center;
 }
+
 #menu {
 	display: none;
 	position: absolute;
 }
+
 #menu.show {
 	display: block;
 	z-index: 10;
 }
+
 .operate {
 	width: 100%;
 }
+
 .collect-btn {
 	background: white;
 }
+
 .log {
 	display: none;
 	width: 100%;
 	height: 120px;
 }
+
 .log-item {
 	position: relative;
 }
+
 #history {
 	width: 100%;
 	height: 100px;
 	margin: 10px 0px 10px 10px;
 	overflow-y: scroll;
 }
+
 .health {
 	line-height: 64px;
 }
+
 .heart {
 	width: 32px;
 	height: 32px;
@@ -75,9 +91,11 @@ html, body {
 	position: relative;
 	top: 8px;
 }
+
 .heart.half {
 	background-image: url(/image/half-heart.gif);
 }
+
 .item {
 	box-sizing: border-box;
 	display: inline-block;
@@ -89,6 +107,7 @@ html, body {
 	cursor: pointer;
 	margin: 2px;
 }
+
 .item-pic {
 	width: 100%;
 	height: 100%;
@@ -96,6 +115,7 @@ html, body {
 	background-position: center;
 	background-size: 40px 40px;
 }
+
 .amount {
 	position: relative;
 	top: -8px;
@@ -104,6 +124,7 @@ html, body {
 	top: -24px;
 	font-size: 12px;
 }
+
 .scene {
 	width: 100%;
 	height: 230px;
@@ -112,21 +133,26 @@ html, body {
 	background-size: contain;
 	overflow: hidden;
 }
+
 .sky-filter {
 	width: 100%;
 	height: 100%;
 	-webkit-transition: background 1s;
 	transition: background 1s;
 }
+
 .sky-filter.morning {
 	background: rgba(255, 255, 255, 0);
 }
+
 .sky-filter.night {
 	background: rgba(40, 40, 60, 0.9);
 }
+
 .sky-filter.noon {
 	background: rgba(255, 255, 255, 0.3);
 }
+
 .avatar {
 	position: absolute;
 	bottom: 54px;
@@ -134,6 +160,7 @@ html, body {
 	margin-left: -32px;
 	z-index: 2;
 }
+
 .land {
 	background-image: url(/image/land.gif);
 	background-size: 120% 100%;
@@ -144,6 +171,7 @@ html, body {
 	position: absolute;
 	bottom: -24px;
 }
+
 #makelist {
 	width: 300px;
 	height: 300px;
@@ -156,15 +184,18 @@ html, body {
 	z-index: 30;
 	display: none;
 }
+
 #makelist.show {
 	display: block;
 }
+
 .makeitem {
 	float: left;
 	width: 20%;
 	height: 40px;
 	line-height: 40px;
 }
+
 .makeitempic {
 	width: 32px;
 	height: 32px;
@@ -175,12 +206,14 @@ html, body {
 	margin-top: -10px;
 	top: 10px;
 }
+
 .makeformula {
 	float: right;
 	width: 75%;
 	height: 40px;
 	line-height: 40px;
 }
+
 #makelist .resource {
 	width: 32px;
 	height: 32px;
@@ -191,12 +224,14 @@ html, body {
 	margin-top: -10px;
 	top: 10px;
 }
+
 .info-box {
 	background-color: #333333;
 	color: #ffffff;
 	position: relative;
 	border-radius: 4px;
 }
+
 .info-box:after {
 	content: "";
 	border: 1px solid;
@@ -209,6 +244,7 @@ html, body {
 	line-height: 22px;
 	border-radius: 2px;
 }
+
 .char-action {
 	width: 54px;
 	height: 30px;
@@ -219,6 +255,24 @@ html, body {
 	font-size: 14px;
 	cursor: pointer;
 }
+
 #logTab {
 	display: none;
+}
+
+.normalEnv {
+	color: #777777;
+}
+
+.woodEnv {
+	color: #007700;
+}
+
+.actionChoose {
+	color: #770000;
+}
+
+#status {
+	overflow-x: hidden;
+	overflow-y: scroll;
 }

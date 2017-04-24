@@ -1,7 +1,7 @@
 var dayTimeName = ["上午", "下午", "夜晚"];
 
 var itemName = {
-	hand: "萬能雙手",
+	hand: "雙手",
 
 	//necessity
 	food: "食物",

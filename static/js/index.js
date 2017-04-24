@@ -11,6 +11,9 @@ $(document).ready(function() {
 	getNewWeather();
 	render();
 
+	var rect = $("#status")[0].getBoundingClientRect();
+	$("#status").height($(window).height() - rect.top);
+
 	$("#start-btn").click(function(e) {
 		$(".functionTab").hide();
 		$("#logTab").show();
@@ -507,6 +510,8 @@ var onMidNightEvent = function() {
 	}
 }
 
+var actions;
+
 var onEncounter = function() {
 	char = getChar();
 	adventureTime--;
@@ -535,50 +540,101 @@ var onEncounter = function() {
 	} else {
 		var msg = (ev.desc).replace(new RegExp("\\$N", 'g'), char.name);
 	}
-	$("#log").append("<div>" + msg + "</div>");
+	$("#log").append('<div class="' + adventureEnv + 'Env">' + msg + "</div>");
 
 	// TODO: show actions
-	var action;
+	if (ev.action !== undefined) {
+		actions = ev.action;
+		$("#log").append('<div class="actionChoose">要採取什麼行動嗎？</div>');
+		$("#log").append('<div class="adventure-action-btn" action-id="-1">直接離開</div>');
+		$.each(actions, function(i, v) {
+			$("#log").append('<div class="adventure-action-btn" action-id="' + i + '">使用' + itemName[v.item] + '</div>');
+		});
+		$(".adventure-action-btn").click(function(e) {
+			var $target = $(e.target);
+			if (!$target.hasClass("disabled"))
+				chooseAction($(e.target).attr("action-id"));
+		});
+		isChoosingAction = true;
+	}
 
-	// TODO: get loot
+	// get loot
 	if (ev.loot != undefined) {
-		$.each(ev.loot, function(i, v) {
-			console.log(v);
+		getLoot(ev.loot);
+	}
+
+	endEncounder();
+}
+
+var endEncounder = function() {
+	$("#status").scrollTop(1000);
+	if (actions == undefined) {
+		if (adventureTime > 0) {
+			setTimeout(function() {
+				onEncounter();
+			}, 1000);
+		} else {
+			countAdventureResult();
+			$("#start").prop("disabled", false);
+		}
+	}
+}
+
+var chooseAction = function(actionId) {
+	if (actionId == "-1") {
+		$("#log").append('<div>離開了</div>');
+	} else {
+		// TODO: check if has specific item
+		var char = getChar();
+		var msg = (actions[actionId].desc).replace(new RegExp("\\$N", 'g'), char.name);
+		$("#log").append('<div class="' + adventureEnv + 'Env">' + msg + '</div>');
+		getLoot(actions[actionId].loot);
+	}
+
+	actions = undefined;
+	$(".adventure-action-btn").addClass("disabled");
+	endEncounder();
+}
+
+var getLoot = function(loot) {
+	if (loot != undefined) {
+		$.each(loot, function(i, v) {
 			var amount = v.min + Math.floor(Math.random() * (v.max - v.min + 1));
 			if (lootItem[v.type] == undefined) {
 				lootItem[v.type] = amount;
 			} else {
 				lootItem[v.type] += amount;
 			}
+			$("#log").append('<div class="' + adventureEnv + 'Env">獲得' + itemName[v.type] + 'x' + amount + "</div>");
 			addInventory(v.type, amount);
 		});
-	} else if (action != undefined && action.loot != undefined) {
-
-	}
-
-	if (adventureTime > 0) {
-		setTimeout(function() {
-			onEncounter();
-		}, 1000);
-	} else {
-		countAdventureResult();
-		$("#start").prop("disabled", false);
 	}
 }
 
+var sizeOfObject = function(obj) {
+	var size = 0,
+		key;
+	for (key in obj) {
+		if (obj.hasOwnProperty(key)) size++;
+	}
+	return size;
+}
+
 var countAdventureResult = function() {
-	if (lootItem.length == 0) {
+	if (sizeOfObject(lootItem) == 0) {
 		$("#log").append("<div>今日的採集結束，沒有獲得任何資源</div>");
 	} else {
 		var lootmsg = "";
-		console.log(lootmsg);
 		$.each(lootItem, function(i, v) {
 			lootmsg += itemName[i] + "x" + v;
 		});
 		$("#log").append("<div>今日的採集結束，獲得" + lootmsg + "</div>");
 	}
-	$("#log").append("<div>回到營地休息</div>");
 	render();
+	setTimeout(function() {
+		$("#inventory-btn").click();
+	}, 2000);
+	$("#status").scrollTop(1000);
 }
 
 var getChar = function() {
