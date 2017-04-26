@@ -201,7 +201,7 @@ var render = function() {
 
 	$("#inventory").empty();
 	$.each(inventory, function(i, v) {
-		if (i == "food" || i == "water" || v > 0) {
+		if (i != "hand" && (i == "food" || i == "water" || v > 0)) {
 			var html = '<div class="item" title="' +
 				itemName[i] +
 				'"><div data-pic="' + i + '" class="item-pic' +
@@ -234,6 +234,7 @@ var render = function() {
 	});
 }
 
+/*
 var doFish = function() {
 	r = Math.floor(Math.random() * 4);
 	log(dayTimeName[dayTime - 1] + "選擇了外出捕魚");
@@ -317,7 +318,6 @@ var doWater = function() {
 	}
 }
 
-/*
 var doLumber = function() {
 	r = Math.floor(Math.random() * 2);
 	log(dayTimeName[dayTime - 1] + "選擇了外出蒐集木材");
@@ -542,13 +542,18 @@ var onEncounter = function() {
 	}
 	$("#log").append('<div class="' + adventureEnv + 'Env">' + msg + "</div>");
 
-	// TODO: show actions
+	// show actions
 	if (ev.action !== undefined) {
 		actions = ev.action;
 		$("#log").append('<div class="actionChoose">要採取什麼行動嗎？</div>');
 		$("#log").append('<div class="adventure-action-btn" action-id="-1">直接離開</div>');
 		$.each(actions, function(i, v) {
-			$("#log").append('<div class="adventure-action-btn" action-id="' + i + '">使用' + itemName[v.item] + '</div>');
+			var hasItem = inventory[v.item] > 0;
+			if (hasItem) {
+				$("#log").append('<div class="adventure-action-btn" action-id="' + i + '">使用' + itemName[v.item] + '</div>');
+			} else {
+				$("#log").append('<div class="disabled-adventure-action-btn" action-id="' + i + '">使用' + itemName[v.item] + '</div>');
+			}
 		});
 		$(".adventure-action-btn").click(function(e) {
 			var $target = $(e.target);

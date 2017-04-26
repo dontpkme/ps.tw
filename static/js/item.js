@@ -31,5 +31,6 @@ $.each(itemName, function(i, v) {
 	inventory[i] = 0;
 });
 
+inventory.hand = 1;
 inventory.food = 5;
 inventory.water = 5;

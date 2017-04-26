@@ -272,6 +272,14 @@ body {
 	color: #770000;
 }
 
+.adventure-action-btn {
+}
+
+.disabled-adventure-action-btn {
+	color: #cacaca;
+	text-decoration: line-through;
+}
+
 #status {
 	overflow-x: hidden;
 	overflow-y: scroll;
