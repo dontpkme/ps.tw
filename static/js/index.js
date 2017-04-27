@@ -96,9 +96,8 @@ $(document).ready(function() {
 	*/
 });
 
-var log = function(str) {
-	dialog(str);
-	$("#history").append("<div class='log-item'>" + str + "</div>").scrollTop(10000);
+var log = function(str, color, time) {
+
 }
 
 var dialogContent;
@@ -333,7 +332,6 @@ var doLumber = function() {
 			break;
 	}
 }
-*/
 
 var doStone = function() {
 	r = Math.floor(Math.random() * 2);
@@ -346,6 +344,7 @@ var doStone = function() {
 			break;
 	}
 }
+*/
 
 var getDayTimePassMessage = function() {
 	if (dayTime == 2) {
@@ -401,37 +400,37 @@ var getNewWeather = function() {
 		if (r == 1) {
 			newWeather = "sunny";
 			if (weather == newWeather) {
-				log("天氣持續良好穩定");
+				dialog("天氣持續良好穩定");
 			} else {
-				log("天氣趨於穩定");
+				dialog("天氣趨於穩定");
 			}
 		} else if (r == 2) {
 			newWeather = "hot";
 			if (weather == newWeather) {
-				log("炎熱的天氣依舊");
+				dialog("炎熱的天氣依舊");
 			} else {
-				log("天氣變得很熱");
+				dialog("天氣變得很熱");
 			}
 		} else if (r == 3) {
 			newWeather = "rainy";
 			if (weather == newWeather) {
-				log("雨勢仍然沒有停止");
+				dialog("雨勢仍然沒有停止");
 			} else {
-				log("開始下雨了");
+				dialog("開始下雨了");
 			}
 		} else if (r == 4) {
 			newWeather = "cloudy";
 			if (weather == newWeather) {
-				log("天色依然灰濛濛");
+				dialog("天色依然灰濛濛");
 			} else {
-				log("雲層開始越積越厚");
+				dialog("雲層開始越積越厚");
 			}
 		} else if (r == 5) {
 			newWeather = "cold";
 			if (weather == newWeather) {
-				log("寒冷的空氣依舊");
+				dialog("寒冷的空氣依舊");
 			} else {
-				log("氣溫下降了");
+				dialog("氣溫下降了");
 			}
 		}
 		weather = newWeather;
@@ -446,17 +445,17 @@ var onMidDayEvent = function() {
 
 	switch (r) {
 		case 0:
-			log("回到家裡，稍作休息");
+			dialog("回到家裡，稍作休息");
 			break;
 		case 1:
-			log("回到家裡，發現好像有動物來過的痕跡");
+			dialog("回到家裡，發現好像有動物來過的痕跡");
 			break;
 		case 2:
-			log("回到家裡，發現食物散亂一地，數量少了一些");
+			dialog("回到家裡，發現食物散亂一地，數量少了一些");
 			addInventory("food", -(Math.ceil(Math.random() * 2)));
 			break;
 		case 3:
-			log("回到家裡，發現一隻獼猴正在偷吃存糧");
+			dialog("回到家裡，發現一隻獼猴正在偷吃存糧");
 			addInventory("food", -1);
 			break;
 	}
@@ -467,17 +466,17 @@ var onNightEvent = function() {
 
 	switch (r) {
 		case 0:
-			log("回到家裡，稍作休息");
+			dialog("回到家裡，稍作休息");
 			break;
 		case 1:
-			log("回到家裡，發現好像有動物來過的痕跡");
+			dialog("回到家裡，發現好像有動物來過的痕跡");
 			break;
 		case 2:
-			log("回到家裡，發現食物散亂一地，數量少了一些");
+			dialog("回到家裡，發現食物散亂一地，數量少了一些");
 			addInventory("food", -(Math.ceil(Math.random() * 2)));
 			break;
 		case 3:
-			log("回到家裡，發現一隻獼猴正在偷吃存糧");
+			dialog("回到家裡，發現一隻獼猴正在偷吃存糧");
 			addInventory("food", -1);
 			break;
 	}
@@ -488,10 +487,10 @@ var onMorningEvent = function() {
 
 	switch (r) {
 		case 0:
-			log("一覺醒來");
+			dialog("一覺醒來");
 			break;
 		case 1:
-			log("一覺醒來，昨晚的水氣凝結不少露水，順利收集起來");
+			dialog("一覺醒來，昨晚的水氣凝結不少露水，順利收集起來");
 			addInventory("water", 1);
 			break;
 	}
@@ -502,10 +501,10 @@ var onMidNightEvent = function() {
 
 	switch (r) {
 		case 0:
-			log("夜晚十分寧靜");
+			dialog("夜晚十分寧靜");
 			break;
 		case 1:
-			log("黑夜中總覺得附近有窸窣的聲響");
+			dialog("黑夜中總覺得附近有窸窣的聲響");
 			break;
 	}
 }
@@ -518,14 +517,11 @@ var onEncounter = function() {
 
 	// get adventure environment
 	// TODO: get differeny environment by different chance
-	var r = Math.floor(Math.random() * 2);
-	switch (r) {
-		case 0:
-			adventureEnv = "normal";
-			break;
-		case 1:
-			adventureEnv = "wood";
-			break;
+	var r = Math.floor(Math.random() * 100);
+	if (r > 20) {
+		adventureEnv = "normal";
+	} else {
+		adventureEnv = "wood";
 	}
 
 	// get encounter event
@@ -540,7 +536,7 @@ var onEncounter = function() {
 	} else {
 		var msg = (ev.desc).replace(new RegExp("\\$N", 'g'), char.name);
 	}
-	$("#log").append('<div class="' + adventureEnv + 'Env">' + msg + "</div>");
+	$("#log").append('<div class="' + adventureEnv + 'Env">' + (16 - adventureTime) + ':00 ' + msg + "</div>");
 
 	// show actions
 	if (ev.action !== undefined) {
@@ -549,16 +545,18 @@ var onEncounter = function() {
 		$("#log").append('<div class="adventure-action-btn" action-id="-1">直接離開</div>');
 		$.each(actions, function(i, v) {
 			var hasItem = inventory[v.item] > 0;
-			if (hasItem) {
-				$("#log").append('<div class="adventure-action-btn" action-id="' + i + '">使用' + itemName[v.item] + '</div>');
+			var hasTime = !v.cost || adventureTime >= v.cost;
+			if (hasItem && hasTime) {
+				$("#log").append('<div class="adventure-action-btn" action-id="' + i + '">使用' + itemName[v.item] + '(' + (v.cost) + 'hr)</div>');
 			} else {
-				$("#log").append('<div class="disabled-adventure-action-btn" action-id="' + i + '">使用' + itemName[v.item] + '</div>');
+				$("#log").append('<div class="disabled-adventure-action-btn" action-id="' + i + '">使用' + itemName[v.item] + '(' + (v.cost) + 'hr)</div>');
 			}
 		});
 		$(".adventure-action-btn").click(function(e) {
 			var $target = $(e.target);
-			if (!$target.hasClass("disabled"))
+			if (!$target.hasClass("disabled")) {
 				chooseAction($(e.target).attr("action-id"));
+			}
 		});
 		isChoosingAction = true;
 	}
@@ -589,10 +587,10 @@ var chooseAction = function(actionId) {
 	if (actionId == "-1") {
 		$("#log").append('<div>離開了</div>');
 	} else {
-		// TODO: check if has specific item
 		var char = getChar();
 		var msg = (actions[actionId].desc).replace(new RegExp("\\$N", 'g'), char.name);
-		$("#log").append('<div class="' + adventureEnv + 'Env">' + msg + '</div>');
+		adventureTime -= actions[actionId].cost;
+		$("#log").append('<div class="' + adventureEnv + 'Env">' + (16 - adventureTime) + ':00 ' + msg + '</div>');
 		getLoot(actions[actionId].loot);
 	}
 
@@ -638,7 +636,7 @@ var countAdventureResult = function() {
 	render();
 	setTimeout(function() {
 		$("#inventory-btn").click();
-	}, 2000);
+	}, 3000);
 	$("#status").scrollTop(1000);
 }
 
@@ -687,9 +685,9 @@ var addInventory = function(type, amount) {
 	if (amount == 0)
 		return;
 	else if (amount > 0)
-		log(itemName[type] + " +" + amount);
+		dialog(itemName[type] + " +" + amount);
 	else
-		log(itemName[type] + " " + amount);
+		dialog(itemName[type] + " " + amount);
 }
 
 var getInventoryAmount = function(type) {
@@ -701,16 +699,16 @@ var doEat = function() {
 		addInventory("food", -1);
 	} else {
 		setInventory("food", 0);
-		log("食物不夠，健康度下降了");
+		dialog("食物不夠，健康度下降了");
 		HP -= 1;
 	}
 	if (weather == "hot") {
-		log("炎熱的天氣必須補充更多水份");
+		dialog("炎熱的天氣必須補充更多水份");
 		if (getInventoryAmount("water") >= 2) {
 			addInventory("water", -2);
 		} else {
 			setInventory("water", 0);
-			log("飲水不夠，健康度下降了");
+			dialog("飲水不夠，健康度下降了");
 			HP -= 1;
 		}
 	} else if (weather == "cloudy" || weather == "rainy") {
@@ -719,7 +717,7 @@ var doEat = function() {
 			addInventory("water", -rw);
 		} else {
 			setInventory("water", 0);
-			log("飲水不夠，健康度下降了");
+			dialog("飲水不夠，健康度下降了");
 			HP -= 1;
 		}
 	} else {
@@ -727,7 +725,7 @@ var doEat = function() {
 			addInventory("water", -1);
 		} else {
 			setInventory("water", 0);
-			log("飲水不夠，健康度下降了");
+			dialog("飲水不夠，健康度下降了");
 			HP -= 1;
 		}
 	}
