@@ -36,19 +36,39 @@ $(document).ready(function() {
 		$("#inventoryTab").show();
 	});
 
-	$("#make").click(function(e) {
+	$("#make-btn").click(function(e) {
 		if (!$("#makelist").hasClass("show")) {
 			$("#makelist").addClass("show").empty();
 			$.each(recipes, function(i, v) {
-				var s = '<div class="makeitem"><span class="makeitempic" style="background-image:url(/image/item/' + i + '.gif)" title="' + itemName[i] + '"></span> = </div><div class="makeformula">';
-				$.each(recipes[i].resource, function(ii, vv) {
-					console.log(ii);
-					console.log(vv);
-					console.log(inventory[ii]);
-					s += '<span class="resource" style="background-image:url(/image/item/' + ii + '.gif)" title="' + itemName[ii] + '"></span> x ' + vv;
+				var s = '<div class="makeitem"><span class="makeitempic not-enough-making" style="background-image:url(/image/item/' + i + '.gif)" title="' + itemName[i] + '" data-item="' + i + '"></span> = </div><div class="makeformula">';
+				var enough = true;
+				$.each(recipes[i].resource, function(ii, needAmount) {
+					// console.log(ii);
+					// console.log(needAmount);
+					// console.log(inventory[ii]);
+					if (needAmount > inventory[ii])
+						enough = false;
+					s += '<span class="resource ' + (needAmount <= inventory[ii] ? "enough-resource" : "not-enough-resource") + '" style="background-image:url(/image/item/' + ii + '.gif)" title="' + itemName[ii] + '" data-item="' + ii + '" data-amount="' + needAmount + '"></span> x ' + needAmount;
 				});
 				s += "</div>";
+				if (enough) {
+					s = s.replace("not-enough-making", "enough-making");
+				}
 				$("#makelist").append(s);
+			});
+			$(".makeitempic").click(function(e) {
+				if ($(e.target).hasClass("enough-making")) {
+					// console.log($(e.target).attr("data-item"));
+					addInventory($(e.target).attr("data-item"), 1);
+					$("#makelist").removeClass("show");
+					// console.log($(e.target).parents(".makeitem").next().children());
+					$.each($(e.target).parents(".makeitem").next().children(), function(i, v) {
+						addInventory($(v).attr("data-item"), -$(v).attr("data-amount"));
+						// console.log($(v).attr("data-item"));
+						// console.log($(v).attr("data-amount"));
+					});
+					render();
+				}
 			});
 		} else {
 			$("#makelist").removeClass("show");
@@ -317,33 +337,6 @@ var doWater = function() {
 	}
 }
 
-var doLumber = function() {
-	r = Math.floor(Math.random() * 2);
-	log(dayTimeName[dayTime - 1] + "選擇了外出蒐集木材");
-
-	switch (r) {
-		case 0:
-			log("徒手在樹林中折了一些樹枝");
-			addInventory("branch", 4);
-			break;
-		case 1:
-			log("在樹林中使用石斧砍下一些木材");
-			addInventory("wood", 2);
-			break;
-	}
-}
-
-var doStone = function() {
-	r = Math.floor(Math.random() * 2);
-	log(dayTimeName[dayTime - 1] + "選擇了外出蒐集石材");
-
-	switch (r) {
-		case 0:
-			log("從河邊撿回許多石頭");
-			addInventory("stone", 2);
-			break;
-	}
-}
 */
 
 var getDayTimePassMessage = function() {
@@ -516,12 +509,14 @@ var onEncounter = function() {
 	adventureTime--;
 
 	// get adventure environment
-	// TODO: get differeny environment by different chance
+	// TODO: get different environment by different chance
 	var r = Math.floor(Math.random() * 100);
 	if (r > 20) {
 		adventureEnv = "normal";
-	} else {
+	} else if (r > 10 && r <= 20) {
 		adventureEnv = "wood";
+	} else {
+		adventureEnv = "stone";
 	}
 
 	// get encounter event

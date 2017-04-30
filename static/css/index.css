@@ -268,6 +268,10 @@ body {
 	color: #007700;
 }
 
+.stoneEnv {
+	color: #777700;
+}
+
 .actionChoose {
 	color: #770000;
 }
@@ -283,4 +287,13 @@ body {
 #status {
 	overflow-x: hidden;
 	overflow-y: scroll;
+}
+
+.not-enough-resource,
+.not-enough-making {
+	opacity: 0.3;
+}
+
+.enough-resource,
+.enough-making {
 }

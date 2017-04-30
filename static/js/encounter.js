@@ -38,6 +38,19 @@ var encounters = {
 				max: 6
 			}]
 		}, {
+			item: "stoneknife",
+			cost: 1,
+			desc: "$N拿出石刀用力砍下這棵灌木",
+			loot: [{
+				type: "branch",
+				min: 5,
+				max: 10
+			}, {
+				type: "wood",
+				min: 1,
+				max: 1
+			}]
+		}, {
 			item: "stoneaxe",
 			cost: 1,
 			desc: "$N拿出石斧用力砍下這棵灌木",
@@ -63,6 +76,19 @@ var encounters = {
 				max: 2
 			}]
 		}, {
+			item: "stoneknife",
+			cost: 2,
+			desc: "$N拿出石刀慢慢砍下這棵樹",
+			loot: [{
+				type: "branch",
+				min: 1,
+				max: 3
+			}, {
+				type: "wood",
+				min: 3,
+				max: 6
+			}]
+		}, {
 			item: "stoneaxe",
 			cost: 1,
 			desc: "$N拿出石斧用力砍下這棵樹",
@@ -75,6 +101,15 @@ var encounters = {
 				min: 3,
 				max: 6
 			}]
+		}]
+	}],
+	stone: [{
+		desc: "$N在河邊搜集一些石頭",
+		cost: 0,
+		loot: [{
+			type: "stone",
+			min: 1,
+			max: 3
 		}]
 	}]
 };
